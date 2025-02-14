@@ -1,0 +1,77 @@
+package com.yelnare.rajesh;
+import java.util.*;
+
+public class TestComparator {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub List<Toggle> toggles = new ArrayList<>();
+        
+        // Add Elements in List
+		List<Toggle> toggles = new ArrayList<Toggle>();
+        toggles.add(new Toggle(111, "Mayank"));
+      toggles.add(new Toggle(131, "Anshul"));
+      toggles.add(new Toggle(121, "Solanki"));
+      toggles.add(new Toggle(101, "Aggarwal"));
+      toggles.add(new Toggle(201, "XYZABC"));
+      toggles.add(new Toggle(202, "AAAAA"));
+      toggles.add(new Toggle(202, "ABAAA"));
+
+      // Sort toggles by roll number
+        // using SortbyRoll comparator
+      Collections.sort(toggles, new SortbyRoll());
+
+        System.out.println("Sorted by Roll Number ");
+        List<Toggle> toggleList = new ArrayList<Toggle>();
+      // Iterating over entries to print them
+      for (int i = 0; i < toggles.size(); i++)
+      {
+          System.out.println(toggles.get(i));
+          if(((Toggle)(toggles.get(i))).getKey().equals("Solanki"))
+        	  toggleList.add(toggles.get(i));
+          if(((Toggle)(toggles.get(i))).getKey().equals("Anshul"))
+        	  toggleList.add(toggles.get(i));
+      }
+      System.out.println(" -----");
+      for(int i =0 ; i < toggleList.size(); i++)
+      {
+    	  toggles.remove(toggleList.get(i));
+    	  toggles.add(toggleList.get(i));
+      }
+      
+      for (int i = 0; i < toggles.size(); i++)
+      {
+          System.out.println(toggles.get(i));
+      }
+  }
+
+	}
+
+
+class Toggle {
+    int rollno;
+    String key;
+
+      // Constructor
+    Toggle(int rollno, String name) {
+        this.rollno = rollno;
+        this.key = name;
+    }
+    public String getKey() {
+    	return this.key;
+    }
+
+      // Method to print Toggle
+      // details in main()
+    @Override
+    public String toString() {
+        return rollno + ": " + key;
+    }
+}
+
+class SortbyRoll implements Comparator<Toggle> 
+{    
+      // Compare by roll number in ascending order
+    public int compare(Toggle a, Toggle b) {
+        return a.key.compareTo( b.key);
+    }
+}
